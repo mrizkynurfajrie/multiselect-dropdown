@@ -1124,7 +1124,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       return widget.padding!;
     }
     return widget.selectionType == SelectionType.single
-        ? const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0)
+        ? const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0)
         : const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0);
   }
 }

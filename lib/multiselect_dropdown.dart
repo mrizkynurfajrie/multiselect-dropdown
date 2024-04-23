@@ -123,6 +123,8 @@ class MultiSelectDropDown<T> extends StatefulWidget {
   /// [searchHintStyle] is the label style for search bar in dropdown.
   final TextStyle? searchHintStyle;
 
+  final EdgeInsetsGeometry? searchContentPadding;
+
   /// MultiSelectDropDown is a widget that allows the user to select multiple options from a list of options. It is a dropdown that allows the user to select multiple options.
   ///
   ///  **Selection Type**
@@ -274,6 +276,7 @@ class MultiSelectDropDown<T> extends StatefulWidget {
     this.optionBuilder,
     this.searchLabel = 'Search',
     this.searchHintStyle,
+    this.searchContentPadding,
   })  : networkConfig = null,
         responseParser = null,
         responseErrorBuilder = null,
@@ -334,6 +337,7 @@ class MultiSelectDropDown<T> extends StatefulWidget {
     this.optionBuilder,
     this.searchLabel = 'Search',
     this.searchHintStyle,
+    this.searchContentPadding,
   })  : options = const [],
         super(key: key);
 
@@ -794,6 +798,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
                                         .bottom),
                                 focusNode: _searchFocusNode,
                                 decoration: InputDecoration(
+                                  contentPadding: widget.searchContentPadding ?? EdgeInsets.zero,
                                   fillColor: widget.searchBackgroundColor ??
                                       Colors.grey.shade200,
                                   isDense: true,

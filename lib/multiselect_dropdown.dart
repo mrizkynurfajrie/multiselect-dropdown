@@ -125,6 +125,8 @@ class MultiSelectDropDown<T> extends StatefulWidget {
 
   final EdgeInsetsGeometry? searchContentPadding;
 
+  final double? boxHeight;
+
   /// MultiSelectDropDown is a widget that allows the user to select multiple options from a list of options. It is a dropdown that allows the user to select multiple options.
   ///
   ///  **Selection Type**
@@ -277,6 +279,7 @@ class MultiSelectDropDown<T> extends StatefulWidget {
     this.searchLabel = 'Search',
     this.searchHintStyle,
     this.searchContentPadding,
+    this.boxHeight,
   })  : networkConfig = null,
         responseParser = null,
         responseErrorBuilder = null,
@@ -338,6 +341,7 @@ class MultiSelectDropDown<T> extends StatefulWidget {
     this.searchLabel = 'Search',
     this.searchHintStyle,
     this.searchContentPadding,
+    this.boxHeight,
   })  : options = const [],
         super(key: key);
 
@@ -494,10 +498,12 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
             splashFactory: null,
             onTap: _toggleFocus,
             child: Container(
-              height: widget.chipConfig.wrapType == WrapType.wrap ? null : 42,
+              height: widget.chipConfig.wrapType == WrapType.wrap
+                  ? null
+                  : widget.boxHeight ?? 38,
               constraints: BoxConstraints(
                 minWidth: MediaQuery.of(context).size.width,
-                minHeight: 42,
+                minHeight: 38,
               ),
               padding: _getContainerPadding(),
               decoration: _getContainerDecoration(),
@@ -798,7 +804,8 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
                                         .bottom),
                                 focusNode: _searchFocusNode,
                                 decoration: InputDecoration(
-                                  contentPadding: widget.searchContentPadding ?? EdgeInsets.zero,
+                                  contentPadding: widget.searchContentPadding ??
+                                      EdgeInsets.zero,
                                   fillColor: widget.searchBackgroundColor ??
                                       Colors.grey.shade200,
                                   isDense: true,

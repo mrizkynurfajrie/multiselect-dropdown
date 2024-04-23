@@ -490,10 +490,10 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
             splashFactory: null,
             onTap: _toggleFocus,
             child: Container(
-              height: widget.chipConfig.wrapType == WrapType.wrap ? null : 38,
+              height: widget.chipConfig.wrapType == WrapType.wrap ? null : 42,
               constraints: BoxConstraints(
                 minWidth: MediaQuery.of(context).size.width,
-                minHeight: 38,
+                minHeight: 42,
               ),
               padding: _getContainerPadding(),
               decoration: _getContainerDecoration(),

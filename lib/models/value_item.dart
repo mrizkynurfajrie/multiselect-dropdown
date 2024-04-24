@@ -16,13 +16,20 @@ class ValueItem<T> {
 
   final T? secValue;
 
+  final T? thrValue;
+
   /// Default constructor for [ValueItem]
-  const ValueItem({required this.label, required this.value, this.secValue});
+  const ValueItem({
+    required this.label,
+    required this.value,
+    this.secValue,
+    this.thrValue,
+  });
 
   /// toString method for [ValueItem]
   @override
   String toString() {
-    return 'ValueItem(label: $label, value: $value, secValue: $secValue)';
+    return 'ValueItem(label: $label, value: $value, secValue: $secValue, thrValue: $thrValue)';
   }
 
   /// toMap method for [ValueItem]
@@ -31,15 +38,18 @@ class ValueItem<T> {
       'label': label,
       'value': value,
       'secValue': secValue,
+      'thrValue': thrValue,
     };
   }
 
   /// fromMap method for [ValueItem]
   factory ValueItem.fromMap(Map<String, dynamic> map) {
     return ValueItem<T>(
-        label: map['label'] ?? '',
-        value: map['value'],
-        secValue: map['secValue']);
+      label: map['label'] ?? '',
+      value: map['value'],
+      secValue: map['secValue'],
+      thrValue: map['thrValue'],
+    );
   }
 
   /// toJson method for [ValueItem]
@@ -57,23 +67,27 @@ class ValueItem<T> {
     return other is ValueItem<T> &&
         other.label == label &&
         other.value == value &&
-        other.secValue == secValue;
+        other.secValue == secValue &&
+        other.thrValue == thrValue;
   }
 
   /// Hashcode for [ValueItem]
   @override
-  int get hashCode => label.hashCode ^ value.hashCode ^ secValue.hashCode;
+  int get hashCode =>
+      label.hashCode ^ value.hashCode ^ secValue.hashCode ^ thrValue.hashCode;
 
   /// CopyWith method for [ValueItem]
   ValueItem<T> copyWith({
     String? label,
     T? value,
     T? secValue,
+    T? thrValue,
   }) {
     return ValueItem<T>(
       label: label ?? this.label,
       value: value ?? this.value,
       secValue: secValue ?? this.secValue,
+      thrValue: thrValue ?? this.thrValue,
     );
   }
 }

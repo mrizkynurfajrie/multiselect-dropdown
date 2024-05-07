@@ -809,6 +809,9 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
                                       MediaQuery.of(context).viewInsets.bottom),
                               focusNode: _searchFocusNode,
                               decoration: InputDecoration(
+                                contentPadding: widget.searchContentPadding ??
+                                    EdgeInsets.zero,
+                                hintStyle: widget.searchHintStyle,
                                 fillColor: widget.searchBackgroundColor ??
                                     Colors.grey.shade200,
                                 isDense: true,

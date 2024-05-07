@@ -732,6 +732,9 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
     // Get the showOnTop value from the second item in the values list
     final showOnTop = values[1] as bool;
 
+    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final _size = renderBox.size;
+    final offset = renderBox.localToGlobal(Offset.zero);
     return OverlayEntry(builder: (context) {
       List<ValueItem<T>> options = _options;
       List<ValueItem<T>> selectedOptions = [..._selectedOptions];
@@ -740,7 +743,11 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       return StatefulBuilder(builder: ((context, dropdownState) {
         return Stack(
           children: [
-            Positioned.fill(
+            Positioned(
+              left: offset.dx,
+              top: offset.dy +
+                  _size.height, // Position right below the dropdown button
+              width: _size.width, // Match the width of the dropdown button
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: _onOutSideTap,
@@ -765,8 +772,10 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
                   : Offset.zero,
               child: Material(
                   color: widget.dropdownBackgroundColor ?? Colors.white,
+                  // borderRadius: widget.dropdownBorderRadius != null
+                  //     ? BorderRadius.circular(widget.dropdownBorderRadius!)
+                  //     : null,
                   elevation: 4,
-                  clipBehavior: Clip.antiAlias,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(widget.dropdownBorderRadius ?? 0),
@@ -790,64 +799,54 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (widget.searchEnabled) ...[
-                          ColoredBox(
-                            color:
-                                widget.dropdownBackgroundColor ?? Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: searchController,
-                                onTapOutside: (_) {},
-                                scrollPadding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom),
-                                focusNode: _searchFocusNode,
-                                decoration: InputDecoration(
-                                  contentPadding: widget.searchContentPadding ??
-                                      EdgeInsets.zero,
-                                  fillColor: widget.searchBackgroundColor ??
-                                      Colors.grey.shade200,
-                                  isDense: true,
-                                  filled: true,
-                                  hintText: widget.searchLabel,
-                                  hintStyle: widget.searchHintStyle,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        widget.fieldBorderRadius ?? 12),
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade300,
-                                      width: 0.8,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        widget.fieldBorderRadius ?? 12),
-                                    borderSide: BorderSide(
-                                      color: Theme.of(context).primaryColor,
-                                      width: 0.8,
-                                    ),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(Icons.close),
-                                    onPressed: () {
-                                      searchController.clear();
-                                      dropdownState(() {
-                                        options = _options;
-                                      });
-                                    },
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: searchController,
+                              onTapOutside: (_) {},
+                              scrollPadding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom),
+                              focusNode: _searchFocusNode,
+                              decoration: InputDecoration(
+                                fillColor: widget.searchBackgroundColor ??
+                                    Colors.grey.shade200,
+                                isDense: true,
+                                filled: widget.searchBackgroundColor != null,
+                                hintText: widget.searchLabel,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey.shade300,
+                                    width: 0.8,
                                   ),
                                 ),
-                                onChanged: (value) {
-                                  dropdownState(() {
-                                    options = _options
-                                        .where((element) => element.label
-                                            .toLowerCase()
-                                            .contains(value.toLowerCase()))
-                                        .toList();
-                                  });
-                                },
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 0.8,
+                                  ),
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.close),
+                                  onPressed: () {
+                                    searchController.clear();
+                                    dropdownState(() {
+                                      options = _options;
+                                    });
+                                  },
+                                ),
                               ),
+                              onChanged: (value) {
+                                dropdownState(() {
+                                  options = _options
+                                      .where((element) => element.label
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()))
+                                      .toList();
+                                });
+                              },
                             ),
                           ),
                           const Divider(
@@ -877,8 +876,6 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
                                     setState(() {
                                       _selectedOptions.remove(option);
                                     });
-                                    widget.onOptionRemoved?.call(index, option);
-                                    _controller.clearSelection(option);
                                   } else {
                                     final bool hasReachMax =
                                         widget.maxItems == null

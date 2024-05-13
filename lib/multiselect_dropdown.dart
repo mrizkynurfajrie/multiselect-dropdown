@@ -700,13 +700,13 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
   void _toggleFocus() {
     if (_focusNode.hasFocus) {
       _focusNode.unfocus();
-      _searchFocusNode?.unfocus();
-      _overlayEntry?.remove();
+      if (_searchFocusNode!.hasFocus) {
+        _searchFocusNode!.unfocus();
+        _searchFocusNode!.dispose();
+        _overlayEntry!.remove();
+      }
     } else {
       _focusNode.requestFocus();
-      _overlayEntry = _reponseBody != null && widget.networkConfig != null
-          ? _buildNetworkErrorOverlayEntry()
-          : _buildOverlayEntry();
     }
   }
 

@@ -728,7 +728,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
   }
 
   /// Create the overlay entry for the dropdown.
- OverlayEntry _buildOverlayEntry() {
+  OverlayEntry _buildOverlayEntry() {
     // Calculate the offset and the size of the dropdown button
     final values = _calculateOffsetSize();
     // Get the size from the first item in the values list
@@ -740,11 +740,18 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       List<ValueItem<T>> options = _options;
       List<ValueItem<T>> selectedOptions = [..._selectedOptions];
       final searchController = TextEditingController();
+      final RenderBox renderBox = context.findRenderObject() as RenderBox;
+      final boxSize = renderBox.size;
+      final offset = renderBox.localToGlobal(Offset.zero);
 
       return StatefulBuilder(builder: ((context, dropdownState) {
         return Stack(
           children: [
-            Positioned.fill(
+            Positioned(
+              left: offset.dx,
+              top: offset.dy +
+                  boxSize.height, // Position right below the dropdown button
+              width: boxSize.width, // Match the width of the dropdown button
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: _onOutSideTap,

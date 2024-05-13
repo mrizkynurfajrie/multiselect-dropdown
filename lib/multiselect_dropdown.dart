@@ -736,13 +736,14 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
     // Get the showOnTop value from the second item in the values list
     final showOnTop = values[1] as bool;
 
+    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final boxSize = renderBox.size;
+    final offset = renderBox.localToGlobal(Offset.zero);
+
     return OverlayEntry(builder: (context) {
       List<ValueItem<T>> options = _options;
       List<ValueItem<T>> selectedOptions = [..._selectedOptions];
       final searchController = TextEditingController();
-      final RenderBox renderBox = context.findRenderObject() as RenderBox;
-      final boxSize = renderBox.size;
-      final offset = renderBox.localToGlobal(Offset.zero);
 
       return StatefulBuilder(builder: ((context, dropdownState) {
         return Stack(

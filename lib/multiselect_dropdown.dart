@@ -701,7 +701,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
     if (_focusNode.hasFocus) {
       _focusNode.unfocus();
       _searchFocusNode?.unfocus();
-      dispose();
+      _overlayEntry?.remove();
     } else {
       _focusNode.requestFocus();
     }

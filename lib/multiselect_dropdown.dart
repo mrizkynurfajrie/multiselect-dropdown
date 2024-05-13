@@ -704,6 +704,9 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       _overlayEntry?.remove();
     } else {
       _focusNode.requestFocus();
+      _overlayEntry = _reponseBody != null && widget.networkConfig != null
+          ? _buildNetworkErrorOverlayEntry()
+          : _buildOverlayEntry();
     }
   }
 

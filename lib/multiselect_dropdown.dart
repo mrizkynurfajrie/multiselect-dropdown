@@ -703,7 +703,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       _focusNode.unfocus();
       if (_searchFocusNode != null) {
         debugPrint("masuk sini 2");
-        _searchFocusNode!.unfocus();
+        _searchFocusNode!.removeListener(_handleFocusChange);
       }
     } else {
       _focusNode.requestFocus();

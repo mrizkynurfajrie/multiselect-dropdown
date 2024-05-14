@@ -418,6 +418,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
     _focusNode.addListener(_handleFocusChange);
 
     if (widget.searchEnabled) {
+      debugPrint("search status : ${widget.searchEnabled}");
       _searchFocusNode = FocusNode();
       _searchFocusNode!.addListener(_handleFocusChange);
     }
@@ -699,6 +700,12 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
   /// Method to toggle the focus of the dropdown.
   void _toggleFocus() {
     if (_focusNode.hasFocus) {
+      debugPrint("is search hasFocus : ${_searchFocusNode!.hasFocus}");
+      if (_searchFocusNode!.hasFocus) {
+        debugPrint("masuk");
+        _searchFocusNode?.removeListener(_handleFocusChange);
+        _searchFocusNode?.dispose();
+      }
       _focusNode.unfocus();
     } else {
       _focusNode.requestFocus();

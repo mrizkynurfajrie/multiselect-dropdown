@@ -700,9 +700,9 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
   /// Method to toggle the focus of the dropdown.
   void _toggleFocus() {
     if (_focusNode.hasFocus) {
-      debugPrint("is search hasFocus : ${_searchFocusNode!.hasFocus}");
-      if (_searchFocusNode!.hasFocus) {
-        debugPrint("masuk");
+      debugPrint("is searchFocusNode : ${_searchFocusNode!}");
+      if (_searchFocusNode != null) {
+        debugPrint("masuk searchFocusNode");
         _searchFocusNode?.removeListener(_handleFocusChange);
         _searchFocusNode?.dispose();
       }

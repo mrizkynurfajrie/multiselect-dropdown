@@ -743,10 +743,6 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
     // Get the showOnTop value from the second item in the values list
     final showOnTop = values[1] as bool;
 
-    final RenderBox renderBox = context.findRenderObject() as RenderBox;
-    final boxSize = renderBox.size;
-    final offset = renderBox.localToGlobal(Offset.zero);
-
     return OverlayEntry(builder: (context) {
       List<ValueItem<T>> options = _options;
       List<ValueItem<T>> selectedOptions = [..._selectedOptions];
@@ -755,11 +751,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       return StatefulBuilder(builder: ((context, dropdownState) {
         return Stack(
           children: [
-            Positioned(
-              left: offset.dx,
-              top: offset.dy +
-                  boxSize.height, // Position right below the dropdown button
-              width: boxSize.width, // Match the width of the dropdown button
+            Positioned.fill(
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: _onOutSideTap,
@@ -919,7 +911,6 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
                                     _selectedOptions.clear();
                                     _selectedOptions.add(option);
                                   });
-                                  _searchFocusNode!.unfocus();
                                   _focusNode.unfocus();
                                 }
 

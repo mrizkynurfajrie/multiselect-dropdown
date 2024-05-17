@@ -457,7 +457,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       return;
     }
 
-    if ((_searchFocusNode == null || _searchFocusNode?.hasFocus == false) &&
+    if ((_searchFocusNode != null || _searchFocusNode?.hasFocus != false) &&
         _overlayEntry != null) {
       _overlayEntry?.remove();
     }
@@ -704,7 +704,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       if (_searchFocusNode != null) {
         debugPrint("masuk searchFocusNode");
         _searchFocusNode?.unfocus();
-        _searchFocusNode?.removeListener(_handleFocusChange);
+        
       }
       _focusNode.unfocus();
     } else {

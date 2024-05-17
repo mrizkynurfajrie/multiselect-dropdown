@@ -823,6 +823,8 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
                                 isDense: true,
                                 filled: widget.searchBackgroundColor != null,
                                 hintText: widget.searchLabel,
+                                hintStyle: widget.hintStyle,
+                                contentPadding: widget.searchContentPadding,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide: BorderSide(

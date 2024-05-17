@@ -457,7 +457,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
       return;
     }
 
-    if ((_searchFocusNode != null || _searchFocusNode?.hasFocus != false) &&
+    if ((_searchFocusNode == null || _searchFocusNode?.hasFocus == false) &&
         _overlayEntry != null) {
       _overlayEntry?.remove();
     }
@@ -700,13 +700,13 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
   /// Method to toggle the focus of the dropdown.
   void _toggleFocus() {
     if (_focusNode.hasFocus) {
+      _focusNode.unfocus();
       debugPrint("is searchFocusNode : ${_searchFocusNode!}");
       if (_searchFocusNode != null) {
         debugPrint("masuk searchFocusNode");
         _searchFocusNode?.unfocus();
-        
+        _overlayEntry?.remove();
       }
-      _focusNode.unfocus();
     } else {
       _focusNode.requestFocus();
     }
@@ -735,7 +735,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
   }
 
   /// Create the overlay entry for the dropdown.
-    OverlayEntry _buildOverlayEntry() {
+  OverlayEntry _buildOverlayEntry() {
     // Calculate the offset and the size of the dropdown button
     final values = _calculateOffsetSize();
     // Get the size from the first item in the values list
@@ -756,7 +756,8 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
           children: [
             Positioned(
               left: offset.dx,
-              top: offset.dy + _size.height, // Position right below the dropdown button
+              top: offset.dy +
+                  _size.height, // Position right below the dropdown button
               width: _size.width, // Match the width of the dropdown button
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,

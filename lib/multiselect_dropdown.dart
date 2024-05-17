@@ -501,7 +501,11 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
           child: InkWell(
             splashColor: null,
             splashFactory: null,
-            onTap: _toggleFocus,
+            onTap: _searchFocusNode!.hasFocus
+                ? () {
+                    _overlayEntry!.remove();
+                  }
+                : _toggleFocus,
             child: Container(
               height: widget.chipConfig.wrapType == WrapType.wrap
                   ? null
@@ -701,12 +705,6 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
   void _toggleFocus() {
     if (_focusNode.hasFocus) {
       _focusNode.unfocus();
-      debugPrint("is searchFocusNode : ${_searchFocusNode!}");
-      if (_searchFocusNode != null) {
-        debugPrint("masuk searchFocusNode");
-        _searchFocusNode?.unfocus();
-        _overlayEntry?.remove();
-      }
     } else {
       _focusNode.requestFocus();
     }

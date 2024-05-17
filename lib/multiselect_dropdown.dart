@@ -383,6 +383,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
   @override
   void initState() {
     super.initState();
+    _searchFocusNode = FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _initialize();
     });
@@ -418,7 +419,6 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
     _focusNode.addListener(_handleFocusChange);
 
     if (widget.searchEnabled) {
-      debugPrint("search status : ${widget.searchEnabled}");
       _searchFocusNode = FocusNode();
       _searchFocusNode!.addListener(_handleFocusChange);
     }
@@ -503,7 +503,7 @@ class _MultiSelectDropDownState<T> extends State<MultiSelectDropDown<T>> {
             splashFactory: null,
             onTap: _searchFocusNode!.hasFocus
                 ? () {
-                    _overlayEntry!.remove();
+                    _overlayEntry?.remove();
                   }
                 : _toggleFocus,
             child: Container(

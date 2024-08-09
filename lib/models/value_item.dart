@@ -14,13 +14,22 @@ class ValueItem<T> {
   /// The value of the value item
   final T? value;
 
+  final T? secValue;
+
+  final T? thrValue;
+
   /// Default constructor for [ValueItem]
-  const ValueItem({required this.label, required this.value});
+  const ValueItem({
+    required this.label,
+    required this.value,
+    this.secValue,
+    this.thrValue,
+  });
 
   /// toString method for [ValueItem]
   @override
   String toString() {
-    return 'ValueItem(label: $label, value: $value)';
+    return 'ValueItem(label: $label, value: $value, secValue: $secValue, thrValue: $thrValue)';
   }
 
   /// toMap method for [ValueItem]
@@ -28,6 +37,8 @@ class ValueItem<T> {
     return {
       'label': label,
       'value': value,
+      'secValue': secValue,
+      'thrValue': thrValue,
     };
   }
 
@@ -36,6 +47,8 @@ class ValueItem<T> {
     return ValueItem<T>(
       label: map['label'] ?? '',
       value: map['value'],
+      secValue: map['secValue'],
+      thrValue: map['thrValue'],
     );
   }
 
@@ -53,21 +66,28 @@ class ValueItem<T> {
 
     return other is ValueItem<T> &&
         other.label == label &&
-        other.value == value;
+        other.value == value &&
+        other.secValue == secValue &&
+        other.thrValue == thrValue;
   }
 
   /// Hashcode for [ValueItem]
   @override
-  int get hashCode => label.hashCode ^ value.hashCode;
+  int get hashCode =>
+      label.hashCode ^ value.hashCode ^ secValue.hashCode ^ thrValue.hashCode;
 
   /// CopyWith method for [ValueItem]
   ValueItem<T> copyWith({
     String? label,
     T? value,
+    T? secValue,
+    T? thrValue,
   }) {
     return ValueItem<T>(
       label: label ?? this.label,
       value: value ?? this.value,
+      secValue: secValue ?? this.secValue,
+      thrValue: thrValue ?? this.thrValue,
     );
   }
 }

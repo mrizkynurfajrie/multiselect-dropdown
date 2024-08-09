@@ -18,6 +18,7 @@ class SelectionChip<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       padding: chipConfig.padding.copyWith(right: chipConfig.padding.right + (onItemDelete == null ? 8 : 0)),
       label: Text(item.label),
       shape: RoundedRectangleBorder(

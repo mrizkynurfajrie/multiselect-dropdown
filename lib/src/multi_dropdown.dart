@@ -468,7 +468,7 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
                     isFocused: _dropdownController.isOpen,
                     decoration: _buildDecoration(),
                     textAlign: TextAlign.start,
-                    baseStyle: widget.baseStyle,
+                    baseStyle: widget.baseStyle ?? TextStyle(fontSize: 14),
                     textAlignVertical: TextAlignVertical.center,
                     child: _buildField(),
                   ),

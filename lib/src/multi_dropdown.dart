@@ -93,7 +93,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
     this.dropdownItemDecoration = const DropdownItemDecoration(),
     this.autovalidateMode = AutovalidateMode.disabled,
     this.singleSelect = false,
-    this.baseStyle,
+    this.baseStyle = TextStyle(fontSize: 14),
     this.itemSeparator,
     this.controller,
     this.validator,

@@ -93,7 +93,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
     this.dropdownItemDecoration = const DropdownItemDecoration(),
     this.autovalidateMode = AutovalidateMode.disabled,
     this.singleSelect = false,
-    this.baseStyle = const TextStyle(fontSize: 14),
+    required this.baseStyle,
     this.itemSeparator,
     this.controller,
     this.validator,
@@ -142,7 +142,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
     this.dropdownItemDecoration = const DropdownItemDecoration(),
     this.autovalidateMode = AutovalidateMode.disabled,
     this.singleSelect = false,
-    this.baseStyle = const TextStyle(fontSize: 14),
+    required this.baseStyle,
     this.itemSeparator,
     this.controller,
     this.validator,
@@ -468,7 +468,6 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
                     isFocused: _dropdownController.isOpen,
                     decoration: _buildDecoration(),
                     textAlign: TextAlign.start,
-                    baseStyle: widget.baseStyle ?? TextStyle(fontSize: 14),
                     textAlignVertical: TextAlignVertical.center,
                     child: _buildField(),
                   ),
@@ -577,7 +576,7 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
     final selectedOptions = _dropdownController.selectedItems;
 
     if (widget.singleSelect) {
-      return Text(selectedOptions.first.label);
+      return Text(selectedOptions.first.label, style: widget.baseStyle);
     }
 
     return _buildSelectedItems(selectedOptions);

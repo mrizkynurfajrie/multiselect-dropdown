@@ -93,6 +93,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
     this.dropdownItemDecoration = const DropdownItemDecoration(),
     this.autovalidateMode = AutovalidateMode.disabled,
     this.singleSelect = false,
+    this.baseStyle,
     this.itemSeparator,
     this.controller,
     this.validator,
@@ -141,6 +142,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
     this.dropdownItemDecoration = const DropdownItemDecoration(),
     this.autovalidateMode = AutovalidateMode.disabled,
     this.singleSelect = false,
+    this.baseStyle,
     this.itemSeparator,
     this.controller,
     this.validator,
@@ -196,6 +198,8 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
 
   /// The controller for the dropdown.
   final MultiSelectController<T>? controller;
+
+  final TextStyle baseStyle;
 
   /// The maximum number of selections allowed.
   final int maxSelections;
@@ -464,6 +468,7 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
                     isFocused: _dropdownController.isOpen,
                     decoration: _buildDecoration(),
                     textAlign: TextAlign.start,
+                    baseStyle: widget.baseStyle,
                     textAlignVertical: TextAlignVertical.center,
                     child: _buildField(),
                   ),

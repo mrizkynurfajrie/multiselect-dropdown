@@ -157,6 +157,8 @@ class _Dropdown<T> extends StatelessWidget {
 
     return Ink(
       child: ListTile(
+        contentPadding: dropdownItemDecoration.contentPadding ??
+            EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         title: Text(option.label),
         trailing: trailing,
         dense: true,

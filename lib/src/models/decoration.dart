@@ -57,6 +57,7 @@ class DropdownItemDecoration {
   ///
   /// [disabledIcon] is the icon to display for the disabled dropdown item.
   const DropdownItemDecoration({
+    this.contentPadding,
     this.backgroundColor,
     this.disabledBackgroundColor,
     this.selectedBackgroundColor,
@@ -67,6 +68,7 @@ class DropdownItemDecoration {
     this.disabledIcon,
   });
 
+  final EdgeInsets? contentPadding;
   /// The background color of the dropdown item.
   final Color? backgroundColor;
 

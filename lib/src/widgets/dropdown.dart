@@ -13,7 +13,7 @@ class _Dropdown<T> extends StatelessWidget {
     required this.maxSelections,
     required this.items,
     required this.onItemTap,
-    this.searchFocusNode,
+    // this.searchFocusNode,
     Key? key,
     this.onSearchChange,
     this.itemBuilder,
@@ -42,7 +42,7 @@ class _Dropdown<T> extends StatelessWidget {
   /// The decoration of the search field.
   final SearchFieldDecoration searchDecoration;
 
-  final FocusNode? searchFocusNode;
+  // final FocusNode? searchFocusNode;
 
   /// The maximum number of selections allowed.
   final int maxSelections;
@@ -98,7 +98,7 @@ class _Dropdown<T> extends StatelessWidget {
             children: [
               if (searchEnabled)
                 _SearchField(
-                  focusNode: searchFocusNode!,
+                  // focusNode: searchFocusNode ?? FocusNode(),
                   decoration: searchDecoration,
                   onChanged: _onSearchChange,
                 ),
@@ -201,7 +201,7 @@ class _Dropdown<T> extends StatelessWidget {
 
 class _SearchField extends StatelessWidget {
   const _SearchField({
-    required this.focusNode,
+    // required this.focusNode,
     required this.decoration,
     required this.onChanged,
   });
@@ -210,14 +210,14 @@ class _SearchField extends StatelessWidget {
 
   final ValueChanged<String> onChanged;
 
-  final FocusNode focusNode;
+  // final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: TextField(
-        focusNode: focusNode,
+        // focusNode: focusNode,
         decoration: InputDecoration(
           isDense: true,
           hintText: decoration.hintText,

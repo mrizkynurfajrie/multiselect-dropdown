@@ -101,6 +101,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
     this.enabled = true,
     this.chipDecoration = const ChipDecoration(),
     this.searchEnabled = false,
+    this.searchController,
     this.maxSelections = 0,
     this.selectedItemBuilder,
     this.focusNode,
@@ -150,6 +151,7 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
     this.enabled = true,
     this.chipDecoration = const ChipDecoration(),
     this.searchEnabled = false,
+    this.searchController,
     this.maxSelections = 0,
     this.selectedItemBuilder,
     this.focusNode,
@@ -209,6 +211,9 @@ class MultiDropdown<T extends Object> extends StatefulWidget {
 
   /// Whether the search field is enabled.
   final bool searchEnabled;
+
+  /// Search Controller
+  final TextEditingController? searchController;
 
   /// The focus node for the dropdown.
   final FocusNode? focusNode;
@@ -436,6 +441,7 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
                       width: renderBoxSize.width,
                       items: _dropdownController.items,
                       searchEnabled: widget.searchEnabled,
+                      searchController: widget.searchController ?? TextEditingController(),
                       dropdownItemDecoration: widget.dropdownItemDecoration,
                       itemBuilder: widget.itemBuilder,
                       itemSeparator: widget.itemSeparator,

@@ -56,6 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final controller = MultiSelectController<User>();
 
+  final searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var items = [
@@ -91,6 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         items: items,
                         controller: controller,
                         enabled: true,
+                        baseStyle: const TextStyle(),
+                        searchController: searchController,
                         searchEnabled: true,
                         chipDecoration: const ChipDecoration(
                           backgroundColor: Colors.yellow,

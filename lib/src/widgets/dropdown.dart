@@ -8,6 +8,7 @@ class _Dropdown<T> extends StatelessWidget {
     required this.decoration,
     required this.width,
     required this.searchEnabled,
+    required this.searchController,
     required this.dropdownItemDecoration,
     required this.searchDecoration,
     required this.maxSelections,
@@ -26,6 +27,9 @@ class _Dropdown<T> extends StatelessWidget {
 
   /// Whether the search field is enabled.
   final bool searchEnabled;
+
+  /// Search Controller
+  final TextEditingController searchController;
 
   /// The width of the dropdown.
   final double width;
@@ -99,6 +103,7 @@ class _Dropdown<T> extends StatelessWidget {
               if (searchEnabled)
                 _SearchField(
                   // focusNode: searchFocusNode ?? FocusNode(),
+                  searchController: searchController,
                   decoration: searchDecoration,
                   onChanged: _onSearchChange,
                 ),
@@ -204,11 +209,14 @@ class _SearchField extends StatelessWidget {
     // required this.focusNode,
     required this.decoration,
     required this.onChanged,
+    required this.searchController,
   });
 
   final SearchFieldDecoration decoration;
 
   final ValueChanged<String> onChanged;
+
+  final TextEditingController searchController;
 
   // final FocusNode focusNode;
 
@@ -218,6 +226,7 @@ class _SearchField extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextField(
         // focusNode: focusNode,
+        controller: searchController,
         decoration: InputDecoration(
           isDense: true,
           hintText: decoration.hintText,

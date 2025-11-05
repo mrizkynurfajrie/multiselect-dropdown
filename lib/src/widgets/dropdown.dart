@@ -103,7 +103,6 @@ class _Dropdown<T> extends StatelessWidget {
               if (searchEnabled)
                 _SearchField(
                   // focusNode: searchFocusNode ?? FocusNode(),
-                  searchController: searchController,
                   decoration: searchDecoration,
                   onChanged: _onSearchChange,
                 ),
@@ -209,14 +208,11 @@ class _SearchField extends StatelessWidget {
     // required this.focusNode,
     required this.decoration,
     required this.onChanged,
-    required this.searchController,
   });
 
   final SearchFieldDecoration decoration;
 
   final ValueChanged<String> onChanged;
-
-  final TextEditingController searchController;
 
   // final FocusNode focusNode;
 
@@ -226,7 +222,6 @@ class _SearchField extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: TextField(
         // focusNode: focusNode,
-        controller: searchController,
         decoration: InputDecoration(
           isDense: true,
           hintText: decoration.hintText,

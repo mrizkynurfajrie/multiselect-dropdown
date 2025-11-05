@@ -387,6 +387,8 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
     super.dispose();
   }
 
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return FormField<List<DropdownItem<T>>?>(
@@ -441,7 +443,7 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
                       width: renderBoxSize.width,
                       items: _dropdownController.items,
                       searchEnabled: widget.searchEnabled,
-                      searchController: widget.searchController ?? TextEditingController(),
+                      searchController: searchController,
                       dropdownItemDecoration: widget.dropdownItemDecoration,
                       itemBuilder: widget.itemBuilder,
                       itemSeparator: widget.itemSeparator,
@@ -499,6 +501,8 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
         _dropdownController.closeDropdown();
       });
     }
+
+    searchController.clear();
   }
 
   InputDecoration _buildDecoration() {

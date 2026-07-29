@@ -69,6 +69,7 @@ class DropdownItemDecoration {
   });
 
   final EdgeInsets? contentPadding;
+
   /// The background color of the dropdown item.
   final Color? backgroundColor;
 
@@ -271,6 +272,7 @@ class ChipDecoration {
     this.labelStyle,
     this.borderRadius = const BorderRadius.all(Radius.circular(12)),
     this.wrap = true,
+    this.maxLines,
   });
 
   /// The icon to display for deleting a chip.
@@ -302,4 +304,10 @@ class ChipDecoration {
   /// If true, the chips will wrap to the next line when they reach the end of the row.
   /// If false, the chips will not wrap and will be displayed in a single line, scrolling horizontally if necessary.
   final bool wrap;
+
+  /// The maximum number of lines for the chip label text.
+  ///
+  /// If null, the text will be displayed without any limit on the number of lines.
+  /// If non-null, the text will be truncated with an ellipsis if it exceeds the specified number of lines.
+  final int? maxLines;
 }
